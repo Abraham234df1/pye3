@@ -1,0 +1,493 @@
+/* 
+   ============================================================
+   🎨 1. PANEL DE CONTROL (COLORES HOLLOW PURPLE)
+   ============================================================
+*/
+
+:root {
+    --color-principal: #a855f7;    /* Púrpura Intenso (Vacío Púrpura) */
+    --color-secundario: #3b82f6;   /* Azul Eléctrico (Lapislázuli) */
+    --color-peligro: #ef4444;      /* Rojo Vibrante (Resplandor Rojo) */
+    --color-fondo: #020617;        /* Negro Azulado Profundo */
+    --color-tarjeta: rgba(15, 23, 42, 0.8); /* Cristal oscuro */
+    --color-texto: #f8fafc;        /* Blanco Azulado */
+    --redondeado: 16px;            
+    --fuente: 'Poppins', sans-serif; 
+}
+
+/* Configuración básica de la página */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: var(--fuente);
+    background-image: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.7)), url('../img/1283140.png'); 
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+/* 
+   ============================================================
+   ⚛️ 8. LOADER: TÉCNICA IMAGINARIA (HOLLOW PURPLE)
+   ============================================================
+*/
+
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #020617; /* Fondo negro profundo */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 0.8s ease-out;
+}
+
+.technique-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Esfera Azul (Atracción) */
+.orb-blue {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #fff, #3b82f6);
+    border-radius: 50%;
+    box-shadow: 0 0 30px #3b82f6, 0 0 60px #2563eb;
+    left: -50px;
+    animation: moveBlue 2s ease-in-out forwards;
+    z-index: 2;
+}
+
+/* Esfera Roja (Repulsión) */
+.orb-red {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #fff, #ef4444);
+    border-radius: 50%;
+    box-shadow: 0 0 30px #ef4444, 0 0 60px #dc2626;
+    right: -50px;
+    animation: moveRed 2s ease-in-out forwards;
+    z-index: 2;
+}
+
+/* El Vacío Púrpura (Resultado) */
+.orb-purple {
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, #fff, #a855f7, #581c87);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #a855f7, 0 0 100px #9333ea, 0 0 150px #7e22ce;
+    opacity: 0;
+    animation: hollowPurple 2.5s ease-in-out forwards;
+    z-index: 3;
+}
+
+/* Rayos de energía */
+.lightning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #fff;
+    border-bottom-color: #a855f7;
+    opacity: 0;
+    animation: spinLightning 1s linear infinite, showLightning 2s 1.2s forwards;
+}
+
+/* TEXTO DE CARGA */
+.loader-text {
+    margin-top: 200px;
+    color: white;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    animation: blink 1.5s infinite;
+    opacity: 0;
+    animation: fadeInText 3s forwards;
+}
+
+/* KEYFRAMES */
+
+@keyframes moveBlue {
+    0% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(50px) scale(0.5); opacity: 1; } /* Choca */
+    60% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes moveRed {
+    0% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(-50px) scale(0.5); opacity: 1; } /* Choca */
+    60% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes hollowPurple {
+    0% { width: 0; height: 0; opacity: 0; }
+    50% { width: 10px; height: 10px; opacity: 1; transform: scale(1); } /* Momento del impacto */
+    55% { transform: scale(1.5); background: white; } /* Flash blanco */
+    60% { width: 80px; height: 80px; background: radial-gradient(circle, #fff, #a855f7); }
+    80% { width: 1500px; height: 1500px; opacity: 1; } /* Expansión Masiva */
+    100% { width: 2000px; height: 2000px; opacity: 0; } /* Desvanecimiento */
+}
+
+@keyframes spinLightning {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes showLightning {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fadeInText {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+
+/* 
+   ============================================================
+   🏠 2. ENCABEZADO (HEADER)
+   ============================================================
+*/
+
+header {
+    background: linear-gradient(90deg, var(--color-peligro), var(--color-principal), var(--color-secundario));
+    color: white;
+    padding: 50px 10px;
+    text-align: center;
+    border-radius: 0 0 var(--redondeado) var(--redondeado);
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+header img {
+    border-radius: 50%; 
+    background: white;
+    padding: 2px;
+    box-shadow: 0 0 20px var(--color-principal);
+}
+
+/* Menú de navegación */
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+nav a {
+    text-decoration: none;
+    color: #cbd5e1;
+    font-weight: 600;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+nav a:hover {
+    color: var(--color-principal);
+    text-shadow: 0 0 12px var(--color-principal);
+}
+
+
+/* 
+   ============================================================
+   📦 3. SECCIONES Y TARJETAS (CARDS)
+   ============================================================
+*/
+
+.card {
+    background: var(--color-tarjeta);
+    padding: 30px;
+    border-radius: var(--redondeado);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+}
+
+h2 { 
+    color: var(--color-principal); 
+    margin-bottom: 25px; 
+    border-bottom: 2px solid rgba(168, 85, 247, 0.3);
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid rgba(168, 85, 247, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-family: inherit;
+    background: rgba(30, 41, 59, 0.8);
+    color: white;
+    transition: 0.3s;
+}
+
+textarea:focus, input:focus {
+    outline: none;
+    border-color: var(--color-principal);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+
+/* 
+   ============================================================
+   🔘 4. BOTONES
+   ============================================================
+*/
+
+button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.4s;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primario { 
+    background: linear-gradient(45deg, var(--color-principal), #d946ef);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.btn-secundario { 
+    background: linear-gradient(45deg, var(--color-secundario), #0ea5e9);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-peligro { 
+    background: linear-gradient(45deg, var(--color-peligro), #f43f5e);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+button:hover { 
+    filter: brightness(1.2);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.6);
+}
+
+
+/* 
+   ============================================================
+   📊 5. TABLAS Y GRÁFICAS
+   ============================================================
+*/
+
+.table-wrapper { 
+    overflow-x: auto; 
+    border-radius: 12px; 
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+table { width: 100%; border-collapse: collapse; background: rgba(15, 23, 42, 0.5); }
+
+th { 
+    background: linear-gradient(90deg, rgba(168, 85, 247, 0.8), rgba(59, 130, 246, 0.8));
+    color: white; 
+    padding: 18px; 
+    font-weight: 600;
+}
+
+td { padding: 15px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+
+tr:hover td { background: rgba(168, 85, 247, 0.1); }
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+
+/* 
+   ============================================================
+   🔢 6. RESULTADOS RÁPIDOS (MEDIA, MODA, ETC.)
+   ============================================================
+*/
+
+.res-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 20px; 
+}
+
+.res-item { 
+    background: rgba(30, 41, 59, 0.6);
+    padding: 20px; 
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    transition: 0.4s;
+}
+
+.res-item:hover {
+    transform: translateY(-5px);
+    background: rgba(30, 41, 59, 0.9);
+    border-color: var(--color-principal);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.res-item span { 
+    display: block; 
+    font-size: 0.8rem; 
+    color: #94a3b8; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.res-item strong { 
+    color: #f8fafc; 
+    font-size: 1.5rem; 
+    display: block;
+    text-shadow: 0 0 10px var(--color-principal);
+    word-break: break-all; /* 🛡️ Evita que el número se salga de la caja */
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .res-item strong { font-size: 1.2rem; }
+}
+
+/* 
+   ============================================================
+   📱 7. RESPONSIVIDAD (MOBILE FIRST & QUERIES)
+   ============================================================
+*/
+
+/* Ajustes para Tablets y Celulares Grandes */
+@media (max-width: 992px) {
+    header h1 { font-size: 2rem; }
+    .container { padding: 15px; }
+    .charts-grid { grid-template-columns: 1fr; }
+}
+
+/* Ajustes para Celulares */
+@media (max-width: 600px) {
+    .panel-responsive {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+    .botones-stack {
+        flex-direction: column;
+    }
+    .input-group-responsive {
+        border-left: none !important;
+        padding-left: 0 !important;
+        padding-top: 10px;
+        border-top: 1px solid rgba(168, 85, 247, 0.1);
+        width: 100%;
+        justify-content: space-between;
+    }
+    nav { 
+        flex-wrap: wrap; 
+        gap: 10px; 
+        padding: 10px;
+    }
+    
+    nav a { 
+        font-size: 0.75rem; 
+        padding: 5px;
+    }
+
+    header { padding: 30px 10px; }
+    header h1 { font-size: 1.5rem; flex-direction: column; }
+    header img { margin-bottom: 10px; }
+
+    .card { padding: 20px; }
+    
+    .res-grid { 
+        grid-template-columns: 1fr 1fr; 
+        gap: 10px;
+    }
+
+    .res-item strong { font-size: 1.1rem; }
+
+    /* Hacer que las tablas sean desplazables lateralmente */
+    .table-wrapper {
+        border: none;
+    }
+    
+    table { font-size: 0.8rem; }
+    th, td { padding: 10px 5px; }
+
+    /* Ajustar controles del panel de datos */
+    #datos .card div[style*="display:flex"] {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    /* Diagrama de Tallo y Hoja en móvil */
+    #tallo-hoja-container { font-size: 1rem; }
+}
+
+/* Soporte para Pantallas Muy Grandes */
+@media (min-width: 1400px) {
+    .container { max-width: 1300px; }
+    .charts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+    font-size: 0.9rem;
+}

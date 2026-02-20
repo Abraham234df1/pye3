@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Académica Completa - PyE Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .guia-content h3 { color: var(--color-secundario); margin-top: 25px; border-left: 3px solid var(--color-principal); padding-left: 10px; }
+        .guia-content p { margin-bottom: 15px; color: #cbd5e1; }
+        .formula { background: rgba(168, 85, 247, 0.15); padding: 15px; border-radius: 8px; border-left: 4px solid var(--color-principal); font-family: 'Courier New', monospace; margin: 15px 0; color: #f8fafc; }
+        .btn-regresar { display: inline-block; margin-top: 20px; text-decoration: none; background: var(--color-principal); color: white; padding: 10px 25px; border-radius: 8px; transition: 0.3s; font-weight: bold; }
+        .btn-regresar:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 5px 15px var(--color-principal); }
+        ul { color: #cbd5e1; margin-bottom: 20px; }
+        li { margin-bottom: 8px; }
+        strong { color: var(--color-principal); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="Index.html"><i class="fas fa-arrow-left"></i> Volver al Laboratorio</a>
+    </nav>
+
+    <header>
+        <h1>Guía de Conceptos Estadísticos</h1>
+        <p>Documentación técnica de PyE Lab Académico v2.0</p>
+    </header>
+
+    <div class="container guia-content">
+
+        <!-- 1. DATOS Y MEDIDAS -->
+        <section class="card">
+            <h2><i class="fas fa-calculator"></i> 1. Ingreso de Datos y Medidas</h2>
+            <p>El primer paso es ingresar tu conjunto de datos (mínimo 20) o generarlos aleatoriamente. El sistema calcula automáticamente:</p>
+            <ul>
+                <li><strong>Datos Ordenados:</strong> Muestra la secuencia de menor a mayor.</li>
+                <li><strong>Media (x̄):</strong> Promedio aritmético.</li>
+                <li><strong>Mediana (Me):</strong> Valor central del conjunto ordenado.</li>
+                <li><strong>Moda (Mo):</strong> Valor más frecuente.</li>
+                <li><strong>Rango (R):</strong> Diferencia entre el Máximo y el Mínimo.</li>
+            </ul>
+        </section>
+
+        <!-- 2. TABLAS Y DIAGRAMAS -->
+        <section class="card">
+            <h2><i class="fas fa-table"></i> 2. Tablas y Diagramas</h2>
+            
+            <h3>Tabla de Frecuencias</h3>
+            <p>Organiza los datos en intervalos calculados por la Regla de Sturges o definidos manualmente.</p>
+            <ul>
+                <li><strong>fᵢ:</strong> Frecuencia absoluta (conteo).</li>
+                <li><strong>fᵣ:</strong> Frecuencia relativa (porcentaje).</li>
+                <li><strong>Fᵢ / Fᵣ:</strong> Frecuencias acumuladas.</li>
+            </ul>
+
+            <h3>Diagrama de Tallo y Hoja (2.1)</h3>
+            <p>Visualización semi-gráfica que separa cada dato en:</p>
+            <div class="formula">
+                Tallo (Dígitos principales) | Hoja (Último dígito)<br>
+                Ej: 145 -> 14 | 5
+            </div>
+        </section>
+
+        <!-- 3. VISUALIZACIÓN -->
+        <section class="card">
+            <h2><i class="fas fa-chart-pie"></i> 3. Gráficas Estadísticas</h2>
+            <p>Representaciones visuales generadas automáticamente:</p>
+            <ul>
+                <li><strong>Histograma:</strong> Barras de frecuencia absoluta.</li>
+                <li><strong>Polígono:</strong> Línea que une las marcas de clase.</li>
+                <li><strong>Ojiva:</strong> Curva de frecuencia acumulada (siempre ascendente).</li>
+                <li><strong>Pareto:</strong> Análisis 80/20 ordenado por importancia.</li>
+            </ul>
+        </section>
+
+        <!-- 4. CONJUNTOS -->
+        <section class="card">
+            <h2><i class="fas fa-layer-group"></i> 4. Operaciones con Conjuntos</h2>
+            <p>Herramienta para analizar relaciones entre dos grupos de datos (A y B).</p>
+            <ul>
+                <li><strong>Unión (A ∪ B):</strong> Todos los elementos únicos de ambos conjuntos.</li>
+                <li><strong>Intersección (A ∩ B):</strong> Elementos que se repiten en ambos.</li>
+                <li><strong>Diferencia (A - B):</strong> Elementos exclusivos de A.</li>
+            </ul>
+        </section>
+
+        <!-- 5. PROBABILIDAD -->
+        <section class="card">
+            <h2><i class="fas fa-percentage"></i> 5. Probabilidad y Conceptos</h2>
+            <p>Esta sección conecta tus datos estadísticos con la teoría de probabilidad.</p>
+            
+            <h3>Conceptos Clave</h3>
+            <ul>
+                <li><strong>Experimento:</strong> Seleccionar un dato al azar del conjunto ingresado en la sección 1.</li>
+                <li><strong>Espacio Muestral (S):</strong> El conjunto total de tus datos ($n(S) = n$).</li>
+            </ul>
+
+            <h3>Definición de Evento E</h3>
+            <p>Puedes definir una condición matemática para el evento (ej: $x \geq 50$). El sistema calcula:</p>
+            <div class="formula">
+                P(E) = Casos Favorables (n(E)) / Total de Datos (n(S))
+            </div>
+            
+            <h3>Probabilidad Condicional</h3>
+            <p><strong>P(B|E):</strong> Probabilidad de que ocurra un segundo evento B, dado que ya ocurrió E. Este valor se ingresa manualmente según el problema a resolver.</p>
+        </section>
+
+        <!-- 6. DIAGRAMA DE ÁRBOL -->
+        <section class="card">
+            <h2><i class="fas fa-tree"></i> 6. Diagrama de Árbol</h2>
+            <p>Visualización de la <strong>Regla Multiplicativa</strong>.</p>
+            <div class="formula">P(E ∩ B) = P(E) * P(B|E)</div>
+            <p>Muestra las ramas del evento E (ocurre / no ocurre) y las probabilidades condicionales subsiguientes.</p>
+        </section>
+
+        <!-- 7. COMBINATORIA -->
+        <section class="card">
+            <h2><i class="fas fa-sort-numeric-down"></i> 7. Permutaciones y Combinaciones</h2>
+            
+            <h3>Factorial (n!)</h3>
+            <p>El producto de todos los enteros positivos desde 1 hasta n. Representa el total de formas de ordenar n objetos distintos.</p>
+
+            <h3>Permutaciones (P) vs Combinaciones (C)</h3>
+            <ul>
+                <li><strong>Permutaciones:</strong> El orden IMPORTA (ej: Clave secreta, podio de carrera).</li>
+                <li><strong>Combinaciones:</strong> El orden NO importa (ej: Selección de frutas, equipo de trabajo).</li>
+            </ul>
+            <div class="formula">
+                P(n,r) = n! / (n-r)! <br>
+                C(n,r) = P(n,r) / r!
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-bottom: 50px;">
+            <a href="Index.html" class="btn-regresar">Regresar al Laboratorio</a>
+        </div>
+
+    </div>
+
+    <footer>
+        PyE Lab Académico - Documentación Completa v2.0
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- 🏗️ 1. CONFIGURACIÓN (HEAD) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyE Lab Académico</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/download-removebg-preview.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 🟣 LOADER: TÉCNICA IMAGINARIA PÚRPURA -->
+    <div id="loader-overlay">
+        <div class="technique-container">
+            <!-- Esferas Iniciales -->
+            <div class="orb-blue" style="left: 0; animation: moveBlue 2s ease-in-out forwards;"></div> <!-- Ao (Azul) -->
+            <div class="orb-red" style="right: 0; animation: moveRed 2s ease-in-out forwards;"></div>  <!-- Aka (Rojo) -->
+            
+            <!-- Resultado: Vacío Púrpura -->
+            <div class="orb-purple" style="animation: hollowPurple 2.5s ease-in-out forwards;"></div>
+
+            <!-- Efectos de Rayos -->
+            <div class="lightning" style="width: 150px; height: 150px; animation: spinLightning 0.5s linear infinite, showLightning 1.5s 1s forwards;"></div>
+        </div>
+        <div class="loader-text">Manuel Rosado</div>
+    </div>
+
+    <!-- ⚓ 2. NAVEGACIÓN -->
+    <nav>
+        <a href="#datos">Datos</a>
+        <a href="#frecuencias">Tablas</a>
+        <a href="#graficas">Gráficas</a>
+        <a href="#probabilidad">Probabilidad</a>
+        <a href="#combinatoria">Combinatoria</a>
+        <a href="Guia.html" style="background: var(--color-principal); color: white; padding: 5px 15px; border-radius: 20px; box-shadow: 0 0 10px var(--color-principal); margin-left: 15px;"><i class="fas fa-book"></i> Guía</a>
+    </nav>
+
+    <!-- 🏛️ 3. ENCABEZADO -->
+    <header>
+        <h1>
+            <img src="img/download-removebg-preview.png" alt="Logo" style="height: 50px; vertical-align: middle; margin-right: 10px;"> 
+            Probabilidad y Estadística
+        </h1>
+        <p>Demo web</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 💾 4.1 SECCIÓN DE DATOS -->
+        <section id="datos" class="card">
+            <h2><i class="fas fa-database"></i> 1. Ingreso de Información</h2>
+            
+            <textarea id="input-datos" placeholder="Ingresa al menos 20 datos separados por comas (Ej: 150, 240, 85, 530...)"></textarea>
+            
+            <!-- ⚙️ PANEL DE CONTROL (Botones + Amplitud + Rango) -->
+            <div id="panel-control-datos" class="panel-responsive" style="display:flex; gap:15px; flex-wrap:wrap; align-items: center; background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                
+                <!-- Botones Principales -->
+                <div class="botones-stack" style="display:flex; gap:8px;">
+                    <button class="btn-primario" onclick="analizarDatos()"><i class="fas fa-calculator"></i> Analizar</button>
+                    <button class="btn-secundario" onclick="generarAleatorios()"><i class="fas fa-dice"></i> Generar Azar</button>
+                    <button class="btn-peligro" onclick="limpiarTodo()"><i class="fas fa-trash-alt"></i> Limpiar</button>
+                </div>
+
+                <!-- 📏 Control de Amplitud (Para la Tabla) -->
+                <div class="input-group-responsive" style="display:flex; align-items:center; gap:8px;">
+                    <label style="font-size: 0.8rem; font-weight: 600; color: #94a3b8;">Amplitud Clase:</label>
+                    <input type="number" id="input-amplitud" placeholder="Auto" style="width: 70px; margin-bottom: 0; padding: 5px; background: rgba(15, 23, 42, 0.8); border-color: rgba(168, 85, 247, 0.3);">
+                </div>
+
+                <!-- 🎯 Control de Rango (Para el Azar) -->
+                <div class="input-group-responsive" style="display:flex; align-items:center; gap:8px; border-left: 2px solid rgba(168, 85, 247, 0.2); padding-left: 15px;">
+                    <label style="font-size: 0.8rem; font-weight: 600; color: #94a3b8;">Rango Azar:</label>
+                    <input type="number" id="azar-min" value="1" style="width: 60px; margin-bottom: 0; padding: 5px; background: rgba(15, 23, 42, 0.8); border-color: rgba(168, 85, 247, 0.3);">
+                    <span style="color: #94a3b8;">a</span>
+                    <input type="number" id="azar-max" value="1000" style="width: 70px; margin-bottom: 0; padding: 5px; background: rgba(15, 23, 42, 0.8); border-color: rgba(168, 85, 247, 0.3);">
+                </div>
+            </div>
+
+            <!-- Cuadrados de resultados -->
+            <div class="res-grid" style="margin-top:20px;">
+                <div class="res-item"><span>Media</span><strong id="out-media">-</strong></div>
+                <div class="res-item"><span>Mediana</span><strong id="out-mediana">-</strong></div>
+                <div class="res-item"><span>Moda</span><strong id="out-moda">-</strong></div>
+                <div class="res-item"><span>Mínimo</span><strong id="out-min">-</strong></div>
+                <div class="res-item"><span>Máximo</span><strong id="out-max">-</strong></div>
+                <div class="res-item"><span>Rango</span><strong id="out-rango">-</strong></div>
+            </div>
+        </section>
+
+        <!-- 📊 4.2 TABLA DE FRECUENCIAS -->
+        <section id="frecuencias" class="card">
+            <h2><i class="fas fa-table"></i> 2. Tabla de Frecuencias Agrupada</h2>
+            
+            <!-- 📦 DATOS ORDENADOS -->
+            <div id="datos-ordenados-container" style="margin-bottom: 25px; padding: 15px; background: rgba(15, 23, 42, 0.5); border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.3); font-size: 0.9rem; max-height: 120px; overflow-y: auto; color: #cbd5e1; line-height: 2;">
+                <span style="color: var(--color-principal); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-right: 10px;">Datos Ordenados (n=${datos.length}):</span> 
+                <span id="out-datos-ordenados" style="word-break: break-all;">Esperando análisis...</span>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="tabla-frec">
+                    <thead>
+                        <tr>
+                            <th>Intervalo</th>
+                            <th>xᵢ (Marca)</th>
+                            <th>fᵢ (Abs)</th>
+                            <th>fᵣ (Rel)</th>
+                            <th>Fᵢ (Acum)</th>
+                            <th>Fᵣ (Rel Acum)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 🌿 4.2.1 DIAGRAMA DE TALLO Y HOJA -->
+        <section id="tallo-hoja" class="card">
+            <h2><i class="fas fa-leaf"></i> 2.1 Diagrama de Tallo y Hoja</h2>
+            <div id="tallo-hoja-container" style="font-family: 'Courier New', monospace; font-size: 1.2rem; line-height: 1.8; color: #f8fafc; background: rgba(15, 23, 42, 0.6); padding: 20px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2); overflow-x: auto;">
+                <p style="color: #94a3b8; font-style: italic;">Ingresa datos y presiona Analizar para ver el diagrama...</p>
+            </div>
+        </section>
+
+        <!-- 📈 4.3 GRÁFICAS -->
+        <section id="graficas" class="card">
+            <h2><i class="fas fa-chart-pie"></i> 3. Visualización de Datos</h2>
+            <div class="charts-grid">
+                <div><h3>Histograma (fᵢ)</h3><canvas id="chart-hist"></canvas></div>
+                <div><h3>Polígono de Frecuencias</h3><canvas id="chart-poly"></canvas></div>
+                <div><h3>Ojiva (Frecuencia Acumulada)</h3><canvas id="chart-ojiva"></canvas></div>
+                <div><h3>Diagrama de Pareto</h3><canvas id="chart-pareto"></canvas></div>
+            </div>
+            <!-- 📊 NUEVO: Tabla de apoyo para el Pareto -->
+            <div id="pareto-table-container" style="margin-top: 20px; display: none;">
+                <h4>Desglose de Pareto (Orden de Impacto)</h4>
+                <div class="table-wrapper">
+                    <table id="tabla-pareto-data">
+                        <thead>
+                            <tr>
+                                <th>Intervalo</th>
+                                <th>Frecuencia (fi)</th>
+                                <th>% Individual</th>
+                                <th>% Acumulado</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🎲 4. CONJUNTOS -->
+        <section id="conjuntos" class="card">
+            <h2><i class="fas fa-layer-group"></i> 4. Operaciones con Conjuntos</h2>
+            
+            <div style="background: rgba(30, 41, 59, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                <div style="margin-bottom: 15px;">
+                    <label>Conjunto A:</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="set-a" value="1, 2, 3, 4, 5" style="margin-bottom: 0;">
+                        <button class="btn-secundario" onclick="generarAzarConjunto('set-a')" title="Generar azar A" style="padding: 12px;"><i class="fas fa-dice"></i></button>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label>Conjunto B:</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="set-b" value="4, 5, 6, 7" style="margin-bottom: 0;">
+                        <button class="btn-secundario" onclick="generarAzarConjunto('set-b')" title="Generar azar B" style="padding: 12px;"><i class="fas fa-dice"></i></button>
+                    </div>
+                </div>
+
+                <button class="btn-primario" onclick="calcularConjuntos()" style="width:100%"><i class="fas fa-sync"></i> Calcular Conjuntos</button>
+                <div id="res-conjuntos" style="font-size: 1rem; margin-top:20px; color: #cbd5e1; line-height: 2; padding: 15px; background: rgba(15, 23, 42, 0.3); border-radius: 10px;"></div>
+            </div>
+        </section>
+
+        <!-- 🎲 5. PROBABILIDAD -->
+        <section id="probabilidad" class="card">
+            <h2><i class="fas fa-percentage"></i> 5. Probabilidad y Conceptos</h2>
+            
+            <div style="background: rgba(30, 41, 59, 0.4); padding: 25px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                <div style="margin-bottom: 20px; font-size: 0.9rem; color: #cbd5e1;">
+                    <p><strong>Experimento:</strong> Selección al azar de un dato del conjunto principal.</p>
+                    <p><strong>Espacio Muestral (S):</strong> <span id="out-espacio-muestral" style="word-break: break-all; color: var(--color-secundario); font-family: monospace;">Esperando datos...</span></p>
+                    
+                    <!-- 🛠️ CONTROL DE EVENTO E -->
+                    <div style="margin-top: 20px; background: rgba(15, 23, 42, 0.4); padding: 20px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                        <p style="font-weight: bold; color: var(--color-principal); margin-bottom: 10px;">Evento E: x <span id="out-op-display">≤</span> k con k = <span id="out-k-display">?</span></p>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <select id="evento-op" style="padding: 10px; border-radius: 8px; background: #1e293b; color: white; border: 1px solid var(--color-principal);">
+                                <option value=">=">≥</option>
+                                <option value="<=">≤</option>
+                                <option value="=">=</option>
+                            </select>
+                            <input type="number" id="evento-k" placeholder="k" style="margin-bottom: 0; padding: 10px; width: 90px; background: rgba(15, 23, 42, 0.8);">
+                            <button class="btn-secundario" onclick="definirEventoE()" style="padding: 12px 25px; font-size: 0.9rem;"><i class="fas fa-calculator"></i> Calcular E</button>
+                        </div>
+                        
+                        <div id="res-evento-e-detalle" style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(168, 85, 247, 0.3); font-family: 'Courier New', monospace; font-size: 1rem; color: #f8fafc; line-height: 1.8; display: none;">
+                            <p>Favorables: <span id="out-favorables" style="color: #3b82f6; font-weight: bold;">-</span></p>
+                            <p>Total: <span id="out-total-n" style="color: #a855f7; font-weight: bold;">-</span></p>
+                            <p style="font-size: 1.2rem; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;"><strong>P(E) = <span id="out-pe-final" style="color: var(--color-secundario);">-</span></strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-top: 25px;">
+                    <div>
+                        <label>P(E) <small>(calculado)</small>:</label>
+                        <input type="number" id="p-a" value="0.00" readonly style="background: rgba(15, 23, 42, 0.5); cursor: not-allowed; border-color: rgba(168, 85, 247, 0.1); color: #94a3b8;" title="Se calcula automáticamente en la sección de arriba">
+                    </div>
+                    <div>
+                        <label>P(B|E):</label>
+                        <input type="number" id="p-ba" value="0.50" step="0.01" min="0" max="1">
+                    </div>
+                </div>
+                <button class="btn-primario" onclick="calcularProbabilidad()" style="width:100%; margin-top: 10px;"><i class="fas fa-times-circle"></i> Calcular P(E∩B)</button>
+                <div id="res-prob" style="font-weight:bold; margin-top:20px; text-align:center; color: var(--color-secundario); font-size: 1.3rem;"></div>
+            </div>
+        </section>
+
+        <!-- 🌳 6. DIAGRAMA DE ÁRBOl -->
+        <section id="arbol" class="card">
+            <h2><i class="fas fa-tree"></i> 6. Diagrama de Árbol</h2>
+            <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px;">Representación gráfica de la probabilidad condicionada (Regla Multiplicativa).</p>
+            <div id="tree-container" style="background: rgba(15, 23, 42, 0.8); border-radius: 12px; padding: 30px; overflow-x: auto; min-height: 250px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(168, 85, 247, 0.1);">
+                <p style="color: #64748b;">Calcula la probabilidad arriba para generar el diagrama...</p>
+            </div>
+        </section>
+
+        <!-- 🔢 7. COMBINATORIA -->
+        <section id="combinatoria" class="card">
+            <h2><i class="fas fa-sort-numeric-down"></i> 7. Permutaciones y Combinaciones</h2>
+            <div style="display:flex; gap:20px; align-items: flex-end; flex-wrap: wrap;">
+                <div style="flex:1; min-width: 100px;">
+                    <label>Total de elementos (n):</label>
+                    <input type="number" id="n-val" value="10" min="0">
+                </div>
+                <div style="flex:1; min-width: 100px;">
+                    <label>Elementos a tomar (r):</label>
+                    <input type="number" id="r-val" value="3" min="0">
+                </div>
+                <button class="btn-primario" onclick="calcularCombinatoria()" style="height: 50px; margin-bottom: 20px;"><i class="fas fa-equals"></i> Calcular</button>
+            </div>
+            
+            <div class="res-grid" style="margin-top:10px;">
+                <div class="res-item">
+                    <span>Factorial (n!)</span>
+                    <strong id="out-f" style="color: #f8fafc;">-</strong>
+                    <small style="font-size: 0.7rem; color: #64748b;">Total de arreglos n</small>
+                </div>
+                <div class="res-item">
+                    <span>Permutaciones (P)</span>
+                    <strong id="out-p" style="color: var(--color-secundario);">-</strong>
+                    <small style="font-size: 0.7rem; color: #64748b;">El orden sí importa</small>
+                </div>
+                <div class="res-item">
+                    <span>Combinaciones (C)</span>
+                    <strong id="out-c" style="color: var(--color-principal);">-</strong>
+                    <small style="font-size: 0.7rem; color: #64748b;">El orden no importa</small>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer style="text-align:center; padding:30px; color:#666;">
+        PyE Lab Académico - Herramienta de Probabilidad y Estadística
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
